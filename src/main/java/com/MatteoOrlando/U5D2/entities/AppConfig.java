@@ -1,15 +1,12 @@
-package com.MatteoOrlando.U5D3.entities;
+package com.MatteoOrlando.U5D2.entities;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
-@PropertySource("application.properties")
 public class AppConfig {
 	@Bean(name = "toppings_tomato")
 	public Topping toppingTomatoBean() {
@@ -88,48 +85,27 @@ public class AppConfig {
 		return new Drink("Wine", 607, 7.49);
 	}
 
-	@Bean("pizzas")
-	List<Pizza> pizzaList() {
-		List<Pizza> pizzas = new ArrayList<>();
-		pizzas.add(pizzaMargheritaBean());
-		pizzas.add(pizzaHawaiianBean());
-		pizzas.add(pizzaSalamiBean());
-		pizzas.add(pizzaSalamiXlBean());
-		return pizzas;
-	}
+	@Bean(name = "menu")
+	public Menu menuBean() {
+		List<Pizza> pizzaList = new ArrayList<>();
+		List<Drink> drinkList = new ArrayList<>();
+		List<Topping> toppingsList = new ArrayList<>();
 
-	@Bean("drinks")
-	List<Drink> drinksList() {
-		List<Drink> drinks = new ArrayList<>();
-		drinks.add(lemonadeBean());
-		drinks.add(waterBean());
-		drinks.add(wineBean());
-		return drinks;
-	}
+		pizzaList.add(pizzaMargheritaBean());
+		pizzaList.add(pizzaHawaiianBean());
+		pizzaList.add(pizzaSalamiBean());
+		pizzaList.add(pizzaSalamiXlBean());
 
-	@Bean("toppings")
-	List<Topping> toppingsList() {
-		List<Topping> toppings = new ArrayList<>();
-		toppings.add(toppingTomatoBean());
-		toppings.add(toppingCheeseBean());
-		toppings.add(toppingSalamiBean());
-		toppings.add(toppingHamBean());
-		toppings.add(toppingPineappleBean());
-		return toppings;
-	}
+		drinkList.add(lemonadeBean());
+		drinkList.add(waterBean());
+		drinkList.add(wineBean());
 
-	@Bean("Tavolo1")
-	Table getTable1(@Value("${seat.price}") double seatPrice) {
-		return new Table(1, 5, true, seatPrice);
-	}
+		toppingsList.add(toppingTomatoBean());
+		toppingsList.add(toppingCheeseBean());
+		toppingsList.add(toppingSalamiBean());
+		toppingsList.add(toppingHamBean());
+		toppingsList.add(toppingPineappleBean());
 
-	@Bean("Tavolo2")
-	Table getTable2(@Value("${seat.price}") double seatPrice) {
-		return new Table(2, 4, true, seatPrice);
-	}
-
-	@Bean("Tavolo3")
-	Table getTable3(@Value("${seat.price}") double seatPrice) {
-		return new Table(3, 8, true, seatPrice);
+		return new Menu(pizzaList, drinkList, toppingsList);
 	}
 }

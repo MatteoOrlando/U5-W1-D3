@@ -1,4 +1,4 @@
-package com.MatteoOrlando.U5D3.entities;
+package com.MatteoOrlando.U5D2.entities;
 
 import lombok.Getter;
 
